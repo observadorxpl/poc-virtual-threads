@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: mcp-mvc-vt
+  threads:
+    virtual:
+      enabled: true
+  ai:
+    mcp:
+      server:
+        name: mcp-mvc-vt
+        version: 1.0.0
+        type: SYNC
+        protocol: ${MCP_PROTOCOL:STATELESS}
+        streamable-http:
+          keep-alive-interval: 30s
+        capabilities:
+          tool: true
+
+backend:
+  base-url: ${BACKEND_BASE_URL:http://localhost:8089}
+  timeout: 10s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  level:
+    com.example.poc: ${TOOL_LOG_LEVEL:INFO}

@@ -1,0 +1,22 @@
+{
+  "id": "5d1c8a3e-0000-4000-8000-000000000001",
+  "name": "account-balance",
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/accounts/[^/]+/balance"
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 500,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "accountId": "{{request.path.1}}",
+      "balance": 1520.75,
+      "currency": "USD",
+      "asOf": "{{now}}"
+    },
+    "transformers": ["response-template"]
+  }
+}
